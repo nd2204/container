@@ -11,6 +11,7 @@ OBJ_DIR := build/obj
 BIN_DIR := build/bin
 INC_DIR := include
 TEST_DIR := tests
+LIB_DIR := lib
 
 # Source files and object files
 SRCS := $(wildcard $(SRC_DIR)/*.c)
@@ -55,7 +56,7 @@ $(TARGET): $(OBJS) | $(LIB_DIR)
 # Compile and link test source files to src object
 $(TEST_TARGET): $(OBJS) $(wildcard $(TEST_DIR)/*.c) | $(BIN_DIR)
 	@echo "[*] Linking object files to create $@"
-	$(CC) $(CFLAGS) $(OBJS) $(wildcard $(TEST_DIR)/*.c) -o $(TEST_TARGET) $(LDFLAGS)
+	$(CC) -g $(CFLAGS) $(OBJS) $(wildcard $(TEST_DIR)/*.c) -o $(TEST_TARGET) $(LDFLAGS)
 
 # Compile source files to object files
 $(OBJ_DIR)/%.c.o: $(SRC_DIR)/%.c compiling_echo | $(OBJ_DIR)

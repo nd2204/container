@@ -5,6 +5,10 @@
 #include <stdlib.h>
 #include <memory.h>
 
+static Node* return_node(Node* const np) {
+  return np;
+}
+
 List list_new() {
   List l;
   l.m_len = 0;
@@ -13,7 +17,7 @@ List list_new() {
   return l;
 }
 
-void list_push(List* const lp, void* const data, u64 data_size) {
+void list_push(List* const lp, const void* const data, u64 data_size) {
   if (lp == NULL) {
     *lp = list_new();
   }
@@ -31,16 +35,16 @@ void list_push(List* const lp, void* const data, u64 data_size) {
 }
 
 Node* list_find(const List* const lp, u64 idx) {
-  if (lp == NULL || lp->m_len - 1 < idx) return NULL;
+  if (lp == NULL || idx > lp->m_len - 1) return NULL;
   Node *p = lp->m_head;
-  for (; idx > 1; idx--) {
+  for (; idx > 0; --idx) {
     p = p->m_next;
   }
   return p;
 }
 
 List list_copy(List* const lp) {
-  List l = list_foreach(lp, node_copy);
+  List l = list_foreach(lp, return_node);
   return l;
 }
 

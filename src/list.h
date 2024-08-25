@@ -11,7 +11,7 @@ typedef struct List {
 
 List list_new();
 
-void list_push(List* const lp, const void* data, u64 data_size);
+void list_push(List* const lp, const void* const data, u64 data_size);
 
 Node* list_find(const List* const lp, u64 idx);
 
