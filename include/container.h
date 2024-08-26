@@ -1,6 +1,7 @@
 #ifndef CONTAINER_H
 #define CONTAINER_H
 
-#include "list.h"
+#include "../src/list.h"
+#include "../src/node.h"
 
 #endif
