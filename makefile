@@ -21,19 +21,21 @@ OBJS := $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.c.o, $(SRCS))
 TARGET := $(LIB_DIR)/libcontainer.a
 
 # Test executable target
-TEST_TARGET := $(BIN_DIR)/test_list.c
+ 
+TEST_TARGETS := $(patsubst $(TEST_DIR)/%.c, %, $(wildcard $(TEST_DIR)/*.c))
 
 #-------------------------------------------------------------
 # rules
 #-------------------------------------------------------------
 
 # Default rules
-all: $(TARGET)
+all: $(TARGET) $(TEST_TARGETS)
+	@echo "[v] all completed"
 
 # Run tests
-test: $(TEST_TARGET)
-	@echo "[*] Running $^..."
-	@$^ $(ARGS)
+run: $(TEST_TARGETS)
+	@echo "[*] Running $(target)..."
+	@$(BIN_DIR)/$(target) $(ARGS)
 
 # Clean up build artifacts
 clean:
@@ -54,9 +56,9 @@ $(TARGET): $(OBJS) | $(LIB_DIR)
 #-------------------------------------------------------------
 
 # Compile and link test source files to src object
-$(TEST_TARGET): $(OBJS) $(wildcard $(TEST_DIR)/*.c) | $(BIN_DIR)
+$(TEST_TARGETS): $(OBJS) $(wildcard $(TEST_DIR)/*.c) | $(BIN_DIR)
 	@echo "[*] Linking object files to create $@"
-	$(CC) -g $(CFLAGS) $(OBJS) $(wildcard $(TEST_DIR)/*.c) -o $(TEST_TARGET) $(LDFLAGS)
+	$(CC) -g $(CFLAGS) $(OBJS) $(TEST_DIR)/$@.c -o $(BIN_DIR)/$@ $(LDFLAGS)
 
 # Compile source files to object files
 $(OBJ_DIR)/%.c.o: $(SRC_DIR)/%.c compiling_echo | $(OBJ_DIR)
