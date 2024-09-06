@@ -3,22 +3,25 @@
 
 #include "string.h"
 #include "types.h"
+#include "allocator.h"
 #include "list.h"
 
 // All string must be heap allocated
-typedef struct string_s {
+typedef struct String {
   u64 m_len;
   char* m_data;
-} string_s;
+} String;
 
-string_s str_new(const char *s);
+String str_new(const char *s, Allocator* ap);
 
-u64 str_len(const string_s* const sp);
+u64 str_len(const String* const sp);
 
-const char* str_cat(string_s* dest, const char *s);
+const char* str_cat(String* dest, const char *s);
 
-const char* str_scat(string_s* dest, string_s *src);
+const char* str_scat(String* dest, String *src);
 
-void str_free(const string_s* sp);
+void str_free(const String* sp);
+
+i32 str_find(const String* const sp, const char* target);
 
 #endif
