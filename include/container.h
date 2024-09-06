@@ -3,5 +3,6 @@
 
 #include "../src/list.h"
 #include "../src/node.h"
+#include "../src/string_s.h"
 
 #endif
