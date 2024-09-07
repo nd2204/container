@@ -4,12 +4,18 @@
 #include "string.h"
 #include "types.h"
 #include "allocator.h"
-#include "list.h"
+#include "array.h"
+#include "malloc.h"
+
+#define str(x) str_new(x, &g_stringAllocator);
+
+extern Allocator g_stringAllocator;
 
 // All string must be heap allocated
 typedef struct String {
   u64 m_len;
   char* m_data;
+  Allocator* m_allocator;
 } String;
 
 String str_new(const char *s, Allocator* ap);

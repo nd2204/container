@@ -1,7 +1,6 @@
-#include "string_s.h"
-#include "malloc.h"
+#include "str.h"
 
-#define str(x) str_new(x);
+Allocator g_stringAllocator = DEFAULT_ALLOCATOR;
 
 String str_new(const char *s, Allocator* ap) {
   String newString;
@@ -57,11 +56,8 @@ i32 str_find(const String* const sp, const char* target) {
   return -1;
 }
 
-String* str_split(const String* const sp, const char* delim) {
-  return NULL;
-}
-
 void str_free(const String* sp) {
   if (sp == NULL || sp->m_data == NULL) return;
   free(sp->m_data);
+  sp->m_allocator->free(sizeof(String), (void*) sp, sp->m_allocator->context);
 }

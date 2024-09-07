@@ -3,6 +3,6 @@
 
 #include "../src/list.h"
 #include "../src/node.h"
-#include "../src/string_s.h"
+#include "../src/str.h"
 
 #endif
