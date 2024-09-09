@@ -7,9 +7,7 @@
 #include "array.h"
 #include "malloc.h"
 
-#define str(x) str_new(x, &g_stringAllocator);
-
-extern Allocator g_stringAllocator;
+#define str(x) str_new(x, &g_defaultAllocator);
 
 // All string must be heap allocated
 typedef struct String {

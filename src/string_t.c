@@ -1,6 +1,4 @@
-#include "str.h"
-
-Allocator g_stringAllocator = DEFAULT_ALLOCATOR;
+#include "string_t.h"
 
 String str_new(const char *s, Allocator* ap) {
   String newString;

@@ -1,6 +1,7 @@
 #include "allocator.h"
 #include <malloc.h>
 
+
 void* default_alloc(u64 bytes, void* context) {
   (void) context;
   return malloc(bytes);
@@ -19,3 +20,9 @@ Allocator get_default_allocator() {
     .context = 0
   };
 }
+
+Allocator g_defaultAllocator = {
+  .alloc = default_alloc,
+  .free = default_free,
+  .context = 0
+};
